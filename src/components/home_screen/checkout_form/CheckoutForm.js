@@ -1,6 +1,8 @@
 import React from 'react';
 import {injectStripe} from 'react-stripe-elements';
-
+import { Button } from 'reactstrap';
+import { Col, Row, Container } from 'reactstrap';
+import { InputGroup, InputGroupAddon, Input } from 'reactstrap';
 import CardSection from './CardSection';
 
 class CheckoutForm extends React.Component {
@@ -51,8 +53,24 @@ componentDidMount() {
   render() {
     return (
       <form onSubmit={this.handleSubmit}>
-        <CardSection />
-        <button>Confirm order</button>
+      <Container fluid>
+      <Row className='container'>
+      <Col sm={{ size: 12, order: 2, offset: 0 }}>
+        <InputGroup>
+          <InputGroupAddon addonType="prepend">£</InputGroupAddon>
+          <Input placeholder="Amount to bin" type="number" />
+        </InputGroup>
+       </Col>
+      </Row>
+        <Row>
+          <Col sm={{ size: 8 }}>
+            <CardSection />
+          </Col>
+            <Col sm={{ size: 4 }}>
+            <Button className="float-right">Bin & Share</Button>
+          </Col>
+        </Row>
+      </Container>
       </form>
     );
   }

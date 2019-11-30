@@ -20,7 +20,7 @@ class HomeScreen extends React.Component {
       </Row>
       <Row className='container'>
         <Col sm={{ size: 4, order: 2, offset: 4 }}>
-          <img  src={logo}  />
+          <img  alt="" src={logo}  />
        </Col>
       </Row>
       <Row>

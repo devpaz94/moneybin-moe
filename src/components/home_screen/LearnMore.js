@@ -19,7 +19,7 @@ const LearnMore = (props) => {
       <Button onClick={toggle}>{buttonLabel} Learn More</Button>
       <Modal isOpen={modal} toggle={toggle} className={className}>
         <ModalHeader toggle={toggle}>The story of Moneybin</ModalHeader>
-        <img src={learn_more} />
+        <img src={learn_more} alt="" style={{height: 400}} />
         <ModalBody>
           <p>We're a digital start-up led by two aspiring entrepeneurs who recognise the world is changing.</p>
 

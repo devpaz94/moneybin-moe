@@ -16,8 +16,9 @@ function Header() {
       wasted with the world on social media. Bin your money now in just a few clicks!
       </p>
       <p className="lead">
-      <LearnMore />
       </p>
+      <LearnMore />
+
     </Jumbotron>
   </div>
 );

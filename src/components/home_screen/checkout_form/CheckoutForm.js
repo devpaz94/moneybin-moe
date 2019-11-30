@@ -10,45 +10,36 @@ class CheckoutForm extends React.Component {
   super(props);
   this.state = {
     isLoaded: false,
+    amount: "",
     piID: "123"
   };
 }
 
-componentDidMount() {
-  fetch("http://localhost:8881/payment_intent?amount=100", {headers: {
-      'Access-Control-Allow-Origin': 'http://localhost:8881' }
-    })
-    .then(res => res.json())
-    .then(
-      (result) => {
-        this.setState({
-          isLoaded: true,
-          piID: result
-        });
-      },
-
-      (error) => {
-        console.log(error)
-        this.setState({
-          isLoaded: true,
-          error
-        });
-      }
-    )
-}
 
   handleSubmit = (ev) => {
-    // We don't want to let default form submission happen here, which would refresh the page.
     ev.preventDefault();
 
-    // You can also use handleCardPayment with the PaymentIntents API.
-    // See our handleCardPayment documentation for more:
-    // https://stripe.com/docs/stripe-js/reference#stripe-handle-card-payment
-    console.log(this.state.piID);
-    console.log(this.state.isLoaded);
+    fetch("https://moneybin.herokuapp.com/payment_intent?amount=" + this.state.amount)
+      .then(res => res.json())
+      .then(
+        (result) => {
+          console.log(result);
+          this.props.stripe.handleCardPayment(result);
+        },
 
-    this.props.stripe.handleCardPayment(this.state.piID, {billing_details: {name: 'Jenny Rosen'}});
+        (error) => {
+          console.log(error)
+          this.setState({
+            isLoaded: true,
+            error
+          });
+        }
+      )
   };
+
+  handleAmountChange = amount => {
+    this.setState({ amount: amount.target.value.toString() })
+  }
 
   render() {
     return (
@@ -58,7 +49,7 @@ componentDidMount() {
       <Col sm={{ size: 12, order: 2, offset: 0 }}>
         <InputGroup>
           <InputGroupAddon addonType="prepend">£</InputGroupAddon>
-          <Input placeholder="Amount to bin" type="number" />
+          <Input placeholder="Amount to bin" type="number" value={this.state.amount} onChange={(a) => this.handleAmountChange(a)}/>
         </InputGroup>
        </Col>
       </Row>

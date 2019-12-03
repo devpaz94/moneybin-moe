@@ -1,15 +1,30 @@
 import React from 'react';
-import {StripeProvider} from 'react-stripe-elements';
 import HomeScreen from './components/home_screen/HomeScreen';
+import LoginPage from './components/auth/LoginPage'
+import ProtectedRoute from './components/auth/ProtectedRoute'
+
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link,
+  Redirect,
+  useLocation
+} from "react-router-dom";
 
 class App extends React.Component{
 
 
 render() {
   return (
-    <StripeProvider apiKey="pk_test_KQqH7V64eU0k60x04UVU3aj700BfguImsv" >
-        <HomeScreen />
-      </StripeProvider>
+  <Router>
+    <Switch>
+      <Route path="/login">
+         <LoginPage />
+      </Route >
+         <ProtectedRoute path="/home" component={HomeScreen}/>
+    </Switch>
+  </Router>
   );
 }
 

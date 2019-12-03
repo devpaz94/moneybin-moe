@@ -1,4 +1,5 @@
 import React from 'react';
+import {StripeProvider} from 'react-stripe-elements';
 
 import { Elements } from 'react-stripe-elements';
 import { Col, Row, Container } from 'reactstrap';
@@ -12,6 +13,8 @@ import Footer from './Footer'
 class HomeScreen extends React.Component {
   render() {
     return (
+      <StripeProvider apiKey="pk_test_KQqH7V64eU0k60x04UVU3aj700BfguImsv" >
+
       <Container fluid className='container'>
       <Row className='container'>
         <Col sm={{ size: 12, offset: 0 }}>
@@ -36,6 +39,8 @@ class HomeScreen extends React.Component {
         </Col>
       </Row>
       </Container>
+    </StripeProvider>
+
     );
   }
 }
